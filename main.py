@@ -7,14 +7,6 @@ from kivy.core.window import Window
 from kivy.clock import Clock
 from login_firebase import Accont
 
-gnome = ""
-gemail = ""
-gemailr = ""
-ghjanta = ""
-ghcafe = ""
-ghalmoço = ""
-ghexercicio = ""
-
 class Manager(ScreenManager):
     pass
 
