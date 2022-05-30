@@ -1,0 +1,380 @@
+#:import images_path kivymd.images_path
+
+<Manager>:
+    LoginScreen:
+        name: "login"
+    HomePage:
+        name: "home_page"
+    ResetPassword:
+        name: "reset_password"
+    Register:
+        name: "register"
+    Exercise:
+        name: "exercise"
+
+<LoginScreen>:
+    FloatLayout:
+        Image:
+            source: "data/user.png"
+            size_hint: (.4, .4)
+            pos_hint: {"center_x": .5, "center_y": .78}
+        MDLabel:
+            text: "H-Smart"
+            pos_hint: {"center_x": .5, "center_y": .62}
+            halign: "center"
+            bold: True
+            font_style: "H5"
+        MDLabel:
+            text: "Login para continuar."
+            pos_hint: {"center_x": .5, "center_y": .58}
+            halign: "center"
+            font_style: "Caption"
+        MDTextField:
+            hint_text: "Email"
+            size_hint_x: .8
+            pos_hint: {"center_x": .5, "center_y": .5}
+            icon_right: "email"
+            icon_right_color: app.theme_cls.primary_color
+            id: text_email
+        MDTextField:
+            hint_text: "Password"
+            size_hint_x: .8
+            pos_hint: {"center_x": .5, "center_y": .4}
+            icon_right: "lock"
+            password: True
+            icon_right_color: app.theme_cls.primary_color
+            id: text_password
+        MDTextButton:
+            text: "Redefine password."
+            pos_hint: {"center_x": .72, "center_y": .33}
+            on_release: app.root.current = "reset_password"
+        MDFillRoundFlatIconButton:
+            text: "Sign In"
+            font_size: 20
+            elevation: 8
+            theme_text_color: "Custom"
+            text_color: 254/255.0, 254/255.0, 254/255.0, 1
+            pos_hint: {"center_x": .5, "center_y": .23}
+            size_hint_x: .8
+            icon: "login"
+            on_release: root.try_sign_in()
+        MDFillRoundFlatIconButton:
+            text: "Sign Up"
+            font_size: 20
+            elevation: 8
+            theme_text_color: "Custom"
+            text_color: 254/255.0, 254/255.0, 254/255.0, 1
+            md_bg_color: 0.18, 0.53, 1, 1
+            pos_hint: {"center_x": .5, "center_y": .12}
+            size_hint_x: .8
+            icon: "plus"
+            on_release: app.root.current = "register"
+<HomePage>:
+    BoxLayout:
+        orientation: "vertical"
+        MDToolbar:
+            title: "Home Page"
+            pos_hint: {"top": 1}
+            left_action_items: [["arrow-left", lambda x: root.callback()]]
+            right_action_items: [["human", lambda x: root.callback_2()]]
+
+            specific_text_color: app.theme_cls.primary_color
+            md_bg_color: 1, 1, 1, 1
+        ScrollView:
+            BoxLayout:
+                orientation: "vertical"
+                size_hint_y:None
+                height:self.minimum_height
+                spacing: '20dp'
+
+                Image:
+                    source: "data/user.png"
+                    size_hint: (.4, None)
+                    pos_hint: {"center_x": .5, "center_y": .5}
+
+                MDLabel:
+                    id: bemvindo
+                    text: "Bem vindo, Fulano!"
+                    halign: "center"
+                    bold: True
+                    font_size: 25
+                    pos_hint: {"top": .5}
+                    size_hint:(1, None)
+                    height: 10
+                
+                GridLayout:
+                    cols: 2
+                    MDIcon:
+                        icon: "clock"
+                        size_hint_x: .1
+                        
+                    MDLabel:
+                        text: "Horários: "
+                        halign: "left"
+                        bold: True
+                        font_size: 20
+                        pos_hint: {"top": 1}
+                        size_hint:(1, None)
+                        
+
+                    #cafe da manhã
+                    MDIcon:
+                        icon: "coffee"
+                        size_hint_x: .1
+                    MDLabel:
+                        id: cafe 
+                        text: "Café da manhã: 7:30"
+                        halign: "left"
+                        bold: True
+                        font_size: 15
+                        pos_hint: {"top": 1}
+                        size_hint:(1, None)
+                        height: "40dp"
+
+                    #almoço
+                    MDIcon:
+                        icon: "food-steak"
+                        size_hint_x: .1
+                    MDLabel:
+                        id: almoço 
+                        text: "Almoço: 12:00"
+                        halign: "left"
+                        bold: True
+                        font_size: 15
+                        pos_hint: {"top": 1}
+                        size_hint:(1, None)
+                        height: "40dp"
+                    
+                    #Janta
+                    MDIcon:
+                        icon: "food-turkey"
+                        size_hint_x: .1
+                    MDLabel:
+                        id: janta
+                        text: "Janta: 19:30"
+                        halign: "left"
+                        bold: True
+                        font_size: 15
+                        pos_hint: {"top": 1}
+                        size_hint:(1, None)
+                        height: "40dp"
+                    #exercicios
+                    MDIcon:
+                        icon: "human"
+                        size_hint_x: .1
+                    MDLabel:
+                        id: exer
+                        text: "Exercícios: 15:00"
+                        halign: "left"
+                        bold: True
+                        font_size: 15
+                        pos_hint: {"top": 1}
+                        size_hint:(1, None)
+                        height: "40dp"
+                            
+<Exercise>
+    BoxLayout:
+        orientation: "vertical"
+        MDToolbar:
+            title: "Exercises"
+            pos_hint: {"top": 1}
+            left_action_items: [["arrow-left", lambda x: root.callback()]]
+            specific_text_color: app.theme_cls.primary_color
+            md_bg_color: 1, 1, 1, 1
+        ScrollView:
+            BoxLayout:
+                orientation: "vertical"
+                size_hint_y:None
+                height:self.minimum_height
+                spacing: '20dp' 
+                padding: ('10dp', '10dp', '10dp', '10dp')
+                
+                Image:
+                    source: "data/user.png"
+                    size_hint: (.4, None)
+                    pos_hint: {"center_x": .5, "center_y": .5}
+
+                MDLabel:
+                    id: exerbemvindo
+                    text: "Bem vindo, a aba de exercícios Fulano!"
+                    halign: "center"
+                    bold: True
+                    font_size: 25
+                    pos_hint: {"top": .5}
+                    size_hint:(1, None)
+                MDLabel:
+                    text: "Faça os exercícios indicados para sair do ócio!"
+                    halign: "left"
+                    font_size: 18
+                    pos_hint: {"top": .5}
+                    size_hint:(1, None)
+
+                #exercise 1    
+                Image:
+                    source: "data/polichinelo.jpg"
+                    size_hint: (1, None)
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    height: 100
+                MDLabel:
+                    text: "10 polichinelos"
+                    font_size: 15
+                    halign: "center"
+                    bold: True
+                #exercise 2
+                Image:
+                    source: "data/agachamento.jpg"
+                    size_hint: (1, None)
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    height: 100
+                MDLabel:
+                    text: "10 agachamentos"
+                    font_size: 15
+                    halign: "center"
+                    bold: True
+                #exercise 3
+                Image:
+                    source: "data/flexao.png"
+                    size_hint: (1, None)
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    height: 100
+                MDLabel:
+                    text: "10 flexões"
+                    font_size: 15
+                    halign: "center"
+                    bold: True
+                #exercise 4
+                Image:
+                    source: "data/abdominal.png"
+                    size_hint: (1, None)
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    height: 100
+                MDLabel:
+                    text: "10 abdominais"
+                    font_size: 15
+                    halign: "center"
+                    bold: True
+
+
+<ResetPassword>:
+    FloatLayout:
+        orientation: "vertical"
+        MDToolbar:
+            pos_hint: {"top": 1}
+            left_action_items: [["arrow-left", lambda x: root.callback()]]
+            specific_text_color: app.theme_cls.primary_color
+            md_bg_color: 1, 1, 1, 1
+        MDLabel:
+            text: "Send E-mail to reset password."
+            font_size: 18
+            bold: True
+            pos_hint: {"center_x": .5, "center_y": .65}
+            halign: "center"
+            id: text_redefined
+        MDTextField:
+            hint_text: "Email"
+            pos_hint: {"center_x": .5, "center_y": .5}
+            size_hint_x: .8
+            icon_right: "email"
+            icon_right_color: app.theme_cls.primary_color
+            id: email_confirm
+        MDRaisedButton:
+            text: "Submit"
+            font_size: 17
+            pos_hint: {"center_x": .5, "center_y": .4}
+            md_bg_color: 0.18, 0.53, 1, 1
+            text_color: 1, 1, 1, 1
+            on_release: root.send_email_confirm()
+<Register>:
+    BoxLayout:
+        orientation: 'vertical'
+        MDToolbar:
+            title: "Register"
+            pos_hint: {"top": 1}
+            left_action_items: [["arrow-left", lambda x: root.callback()]]
+            specific_text_color: app.theme_cls.primary_color
+            md_bg_color: 1, 1, 1, 1
+        ScrollView:
+            BoxLayout:
+                orientation: "vertical"
+                size_hint_y:None
+                height:self.minimum_height
+                spacing: '20dp'
+                padding: ('10dp', '10dp', '10dp', '10dp')
+
+                MDLabel:
+                    text: "Preencha com seus dados"
+                    font_size: 18
+                    bold: True
+                    pos_hint: {"center_x": .5, "center_y": .95}
+                    halign: "center"
+                    id: label_register
+                MDTextField:
+                    hint_text: "Nome"
+                    pos_hint: {"center_x": .5, "center_y": .87}
+                    size_hint_x: .8
+                    icon_right: "account-circle"
+                    icon_right_color: app.theme_cls.primary_color
+                    id: rnome
+                MDTextField:
+                    hint_text: "Email"
+                    pos_hint: {"center_x": .5, "center_y": .8}
+                    size_hint_x: .8
+                    icon_right: "email"
+                    icon_right_color: app.theme_cls.primary_color
+                    id: email_register
+                MDTextField:
+                    hint_text: "Email do responsável"
+                    pos_hint: {"center_x": .5, "center_y": .7}
+                    size_hint_x: .8
+                    icon_right: "email"
+                    icon_right_color: app.theme_cls.primary_color
+                    id: email_responsavel
+                MDTextField:
+                    hint_text: "Password"
+                    pos_hint: {"center_x": .5, "center_y": .6}
+                    size_hint_x: .8
+                    icon_right: "lock"
+                    icon_right_color: app.theme_cls.primary_color
+                    id: password_register
+                MDTextField:
+                    hint_text: "Confirm Password"
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    size_hint_x: .8
+                    icon_right: "lock"
+                    icon_right_color: app.theme_cls.primary_color
+                    id: password_register_confirm
+                MDTextField:
+                    hint_text: "Horário do café da manhã"
+                    pos_hint: {"center_x": .5, "center_y": .4}
+                    size_hint_x: .8
+                    icon_right: "coffee"
+                    icon_right_color: app.theme_cls.primary_color
+                    id: rcafe
+                MDTextField:
+                    hint_text: "Horário do almoço"
+                    pos_hint: {"center_x": .5, "center_y": .3}
+                    size_hint_x: .8
+                    icon_right: "food-steak"
+                    icon_right_color: app.theme_cls.primary_color
+                    id: ralmoço
+                MDTextField:
+                    hint_text: "Horário da janta"
+                    pos_hint: {"center_x": .5, "center_y": .2}
+                    size_hint_x: .8
+                    icon_right: "food-turkey"
+                    icon_right_color: app.theme_cls.primary_color
+                    id: rjantar
+                MDTextField:
+                    hint_text: "Horário dos exercícios"
+                    pos_hint: {"center_x": .5, "center_y": .1}
+                    size_hint_x: .8
+                    icon_right: "human"
+                    icon_right_color: app.theme_cls.primary_color
+                    id: rexercicios    
+                MDRaisedButton:
+                    text: "Submit"
+                    font_size: 17
+                    pos_hint: {"center_x": .5, "center_y": .07}
+                    md_bg_color: 0.18, 0.53, 1, 1
+                    text_color: 1, 1, 1, 1
+                    on_release: root.validate_info()
